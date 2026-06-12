@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>每日塔罗课 MVP</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">每日塔罗课</p>
+          <h1 id="pageTitle">今日学习</h1>
+        </div>
+        <button class="icon-button" id="resetBtn" title="重置体验" aria-label="重置体验">↺</button>
+      </header>
+
+      <main id="app" class="app-main"></main>
+
+      <nav class="tabbar" aria-label="主导航">
+        <button class="tab active" data-view="learn">
+          <span class="tab-icon">◇</span>
+          <span>学习</span>
+        </button>
+        <button class="tab" data-view="daily">
+          <span class="tab-icon">☉</span>
+          <span>抽牌</span>
+        </button>
+        <button class="tab" data-view="ask">
+          <span class="tab-icon">?</span>
+          <span>问牌</span>
+        </button>
+        <button class="tab" data-view="library">
+          <span class="tab-icon">▤</span>
+          <span>牌库</span>
+        </button>
+        <button class="tab" data-view="profile">
+          <span class="tab-icon">◎</span>
+          <span>我的</span>
+        </button>
+      </nav>
+    </div>
+
+    <script src="./data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
