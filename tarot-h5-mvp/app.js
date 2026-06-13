@@ -46,6 +46,29 @@ function miniCardHtml(card) {
   `;
 }
 
+function practiceCardHtml(card) {
+  return `
+    <button class="practice-card" data-preview-card="${card.id}" type="button">
+      <div class="practice-card-image">
+        ${card.imageUrl ? `<img src="${card.imageUrl}" alt="${card.name}" loading="lazy" />` : symbolicCardHtml(card)}
+      </div>
+      <strong>${card.name}</strong>
+      <span>${card.type}</span>
+    </button>
+  `;
+}
+
+function symbolicCardHtml(card) {
+  return `
+    <div class="symbolic-card">
+      <div class="symbolic-sky"></div>
+      <div class="symbolic-mark">${card.symbol}</div>
+      <div class="symbolic-ground"></div>
+      <small>${card.name}</small>
+    </div>
+  `;
+}
+
 function randomCard() {
   return cards[Math.floor(Math.random() * cards.length)];
 }
@@ -95,11 +118,56 @@ function getLessonCover(lesson) {
 }
 
 function theoryArt(lesson) {
-  const icons = ["?", "78", "22/56", "4", "↕", "Q", "3"];
+  const visuals = {
+    1: `
+      <div class="visual-book"><span></span><span></span></div>
+      <div class="visual-question">?</div>
+      <div class="visual-stars"><i></i><i></i><i></i></div>
+    `,
+    2: `
+      <div class="visual-structure">
+        <span>22</span>
+        <span>56</span>
+        <strong>78</strong>
+      </div>
+    `,
+    3: `
+      <div class="visual-classify">
+        <div><strong>大牌</strong><span>主题</span></div>
+        <div><strong>小牌</strong><span>日常</span></div>
+      </div>
+    `,
+    4: `
+      <div class="visual-elements">
+        <span class="fire">火</span>
+        <span class="water">水</span>
+        <span class="air">风</span>
+        <span class="earth">土</span>
+      </div>
+    `,
+    5: `
+      <div class="visual-upright">
+        <span>正位</span>
+        <span>逆位</span>
+      </div>
+    `,
+    6: `
+      <div class="visual-bubbles">
+        <span>如何？</span>
+        <span>看清什么？</span>
+      </div>
+    `,
+    7: `
+      <div class="visual-three-cards">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    `
+  };
   return `
-    <div class="learning-art" aria-label="Learning illustration">
-      <div class="learning-art-orbit"></div>
-      <div class="learning-art-mark">${icons[(lesson.day - 1) % icons.length]}</div>
+    <div class="learning-art lesson-visual day-${lesson.day}" aria-label="Lesson visual">
+      ${visuals[lesson.day] || visuals[1]}
       <div class="learning-art-label">Lesson ${lesson.day}</div>
     </div>
   `;
@@ -199,6 +267,13 @@ function renderLearn() {
     button.addEventListener("click", () => submitTask(button.dataset.submitTask));
   });
   document.querySelector("#saveTakeaway")?.addEventListener("click", saveTakeaway);
+  document.querySelectorAll("[data-preview-card]").forEach((button) => {
+    button.addEventListener("click", () => openCardPreview(button.dataset.previewCard));
+  });
+  document.querySelector("[data-close-preview]")?.addEventListener("click", closeCardPreview);
+  document.querySelector(".card-preview-modal")?.addEventListener("click", (event) => {
+    if (event.target.classList.contains("card-preview-modal")) closeCardPreview();
+  });
 }
 
 function stageMapHtml() {
@@ -307,18 +382,13 @@ function exerciseTaskHtml(id, title, exercise, value, done) {
 
 function exerciseCardsHtml(exercise) {
   if (!exercise?.cards?.length) return "";
+  const layout = exercise.cards.length === 1 ? "single" : exercise.cards.length <= 4 ? "multi" : "scroll";
   return `
-    <div class="exercise-cards" aria-label="Practice cards">
+    <div class="exercise-cards ${layout}" aria-label="Practice cards">
       ${exercise.cards.map((id) => {
         const card = cards.find((item) => item.id === id);
         if (!card) return "";
-        return `
-          <div class="exercise-card">
-            ${miniCardHtml(card)}
-            <span>${card.name}</span>
-            <small>${card.type}</small>
-          </div>
-        `;
+        return practiceCardHtml(card);
       }).join("")}
     </div>
   `;
@@ -484,6 +554,33 @@ function saveTakeaway() {
   state.lessonWork[key].takeaway = value;
   save();
   render();
+}
+
+function openCardPreview(cardId) {
+  const card = cards.find((item) => item.id === cardId);
+  if (!card) return;
+  const existing = document.querySelector(".card-preview-modal");
+  existing?.remove();
+  document.body.insertAdjacentHTML("beforeend", `
+    <div class="card-preview-modal" role="dialog" aria-modal="true" aria-label="${card.name} 大图">
+      <div class="card-preview-panel">
+        <button class="icon-button preview-close" data-close-preview aria-label="关闭">×</button>
+        <div class="card-preview-image">
+          ${card.imageUrl ? `<img src="${card.imageUrl}" alt="${card.name}" />` : symbolicCardHtml(card)}
+        </div>
+        <h2>${card.name}</h2>
+        <p>${card.en} · ${card.type}</p>
+      </div>
+    </div>
+  `);
+  document.querySelector("[data-close-preview]")?.addEventListener("click", closeCardPreview);
+  document.querySelector(".card-preview-modal")?.addEventListener("click", (event) => {
+    if (event.target.classList.contains("card-preview-modal")) closeCardPreview();
+  });
+}
+
+function closeCardPreview() {
+  document.querySelector(".card-preview-modal")?.remove();
 }
 
 function renderDaily() {

@@ -132,6 +132,7 @@ h3 {
   justify-content: space-between;
   padding: 8px;
   min-width: 0;
+  margin: 0 auto;
 }
 
 .card-image {
@@ -140,6 +141,8 @@ h3 {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+  margin: 0 auto;
 }
 
 .learning-art {
@@ -155,6 +158,198 @@ h3 {
   display: grid;
   place-items: center;
   min-width: 0;
+}
+
+.lesson-visual {
+  padding: 12px;
+  background:
+    linear-gradient(160deg, rgba(53, 122, 120, 0.13), rgba(199, 139, 43, 0.14)),
+    #fffdf8;
+}
+
+.visual-book {
+  width: 70px;
+  height: 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  transform: rotate(-5deg);
+}
+
+.visual-book span {
+  border: 2px solid var(--teal);
+  border-radius: 4px 4px 8px 8px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.visual-question {
+  position: absolute;
+  top: 20px;
+  left: calc(100% - 52px);
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--amber);
+  color: #fff;
+  font-weight: 900;
+}
+
+.visual-stars {
+  position: absolute;
+  left: 18px;
+  width: calc(100% - 36px);
+  bottom: 34px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.visual-stars i {
+  width: 13px;
+  height: 13px;
+  background: var(--rose);
+  clip-path: polygon(50% 0%, 61% 36%, 98% 36%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 36%, 39% 36%);
+}
+
+.visual-structure {
+  width: 86px;
+  display: grid;
+  gap: 8px;
+}
+
+.visual-structure span,
+.visual-structure strong {
+  min-height: 32px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(37, 33, 28, 0.28);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.74);
+}
+
+.visual-structure strong {
+  background: var(--teal);
+  color: #fff;
+}
+
+.visual-classify {
+  width: 92px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.visual-classify div {
+  min-height: 78px;
+  display: grid;
+  align-content: center;
+  gap: 5px;
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(37, 33, 28, 0.24);
+}
+
+.visual-classify span,
+.visual-upright span,
+.visual-bubbles span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.visual-elements {
+  width: 94px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
+.visual-elements span {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 900;
+}
+
+.visual-elements .fire {
+  background: #c85a3d;
+}
+
+.visual-elements .water {
+  background: #357a9a;
+}
+
+.visual-elements .air {
+  background: #7f8c9a;
+}
+
+.visual-elements .earth {
+  background: #557a48;
+}
+
+.visual-upright {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.visual-upright span {
+  width: 42px;
+  height: 68px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--teal);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.76);
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.visual-upright span:nth-child(2) {
+  transform: rotate(180deg);
+  border-color: var(--rose);
+}
+
+.visual-bubbles {
+  display: grid;
+  gap: 12px;
+}
+
+.visual-bubbles span {
+  position: relative;
+  padding: 9px 11px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(37, 33, 28, 0.18);
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.visual-three-cards {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.visual-three-cards span {
+  width: 34px;
+  height: 58px;
+  border: 2px solid var(--teal);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 6px 12px rgba(47, 41, 34, 0.12);
+}
+
+.visual-three-cards span:nth-child(1) {
+  transform: rotate(-7deg) translateY(4px);
+}
+
+.visual-three-cards span:nth-child(3) {
+  transform: rotate(7deg) translateY(4px);
 }
 
 .learning-art-orbit {
@@ -189,7 +384,7 @@ h3 {
 .learning-art-label {
   position: absolute;
   left: 10px;
-  right: 10px;
+  width: calc(100% - 20px);
   bottom: 9px;
   z-index: 2;
   padding: 3px 5px;
@@ -233,7 +428,7 @@ h3 {
 .card-title {
   position: absolute;
   left: 10px;
-  right: 10px;
+  width: calc(100% - 20px);
   bottom: 9px;
   z-index: 2;
   padding: 3px 5px;
@@ -529,35 +724,138 @@ h3 {
 }
 
 .exercise-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(82px, 1fr));
   gap: 10px;
-  margin: 12px 0;
+  margin: 12px auto;
+  width: 100%;
 }
 
-.exercise-card {
-  display: grid;
-  justify-items: center;
-  gap: 5px;
-  padding: 10px 8px;
+.exercise-cards.single {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.exercise-cards.multi,
+.exercise-cards.scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 2px 2px 8px;
+  scroll-snap-type: x proximity;
+}
+
+.practice-card {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #fffdf8;
+  color: var(--ink);
   text-align: center;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  justify-items: center;
+  gap: 5px;
+  scroll-snap-align: start;
 }
 
-.exercise-card .mini-card {
-  width: 44px;
+.exercise-cards.single .practice-card {
+  width: min(220px, 100%);
+  max-width: 300px;
 }
 
-.exercise-card span {
+.exercise-cards.multi .practice-card,
+.exercise-cards.scroll .practice-card {
+  flex: 0 0 126px;
+  max-width: 300px;
+}
+
+.practice-card-image {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  aspect-ratio: 3 / 5;
+  border-radius: 8px;
+  border: 1px solid #2f2922;
+  background: #fff8e9;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(47, 41, 34, 0.12);
+}
+
+.exercise-cards.single .practice-card-image {
+  width: clamp(160px, 48vw, 220px);
+}
+
+.practice-card-image img {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.practice-card strong {
+  display: block;
+  width: 100%;
+  text-align: center;
   font-size: 13px;
   font-weight: 800;
 }
 
-.exercise-card small {
+.practice-card span {
+  display: block;
+  width: 100%;
+  text-align: center;
   color: var(--muted);
   font-size: 11px;
+}
+
+.symbolic-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 7px;
+}
+
+.symbolic-sky {
+  height: 28%;
+  border-radius: 5px 5px 0 0;
+  background: linear-gradient(180deg, #f8d98a, #f7f2d2);
+}
+
+.symbolic-mark {
+  display: grid;
+  place-items: center;
+  flex: 1;
+  color: var(--rose);
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.symbolic-ground {
+  height: 18%;
+  border-radius: 0 0 5px 5px;
+  background: linear-gradient(90deg, var(--green), #88a560);
+}
+
+.symbolic-card small {
+  position: absolute;
+  left: 8px;
+  width: calc(100% - 16px);
+  bottom: 7px;
+  padding: 3px;
+  border-radius: 4px;
+  background: rgba(255, 248, 233, 0.9);
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 800;
 }
 
 .choice-grid {
@@ -740,6 +1038,70 @@ h3 {
   line-height: 1.55;
 }
 
+.card-preview-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(37, 33, 28, 0.62);
+}
+
+.card-preview-panel {
+  width: min(100%, 320px);
+  max-width: 300px;
+  margin: 0 auto;
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 18px;
+  border-radius: 8px;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.preview-close {
+  position: absolute;
+  left: calc(100% - 50px);
+  top: 10px;
+  z-index: 1;
+}
+
+.card-preview-image {
+  width: min(230px, 72vw);
+  max-width: 300px;
+  margin: 0 auto;
+  aspect-ratio: 3 / 5;
+  border: 2px solid #2f2922;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff8e9;
+}
+
+.card-preview-image img {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-preview-panel h2 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.card-preview-panel p {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
 .stage-map {
   padding: 14px;
 }
@@ -878,6 +1240,8 @@ h3 {
 }
 
 .mini-card img {
+  display: block;
+  margin: 0 auto;
   width: 100%;
   height: 100%;
   object-fit: cover;
