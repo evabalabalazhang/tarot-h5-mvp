@@ -3,6 +3,7 @@ const state = {
   lessonDay: Number(localStorage.getItem("tarot.lessonDay") || 1),
   doneTasks: JSON.parse(localStorage.getItem("tarot.doneTasks") || "{}"),
   lessonWork: JSON.parse(localStorage.getItem("tarot.lessonWork") || "{}"),
+  lessonSessions: JSON.parse(localStorage.getItem("tarot.lessonSessions") || "{}"),
   showCompletion: false,
   dailyCard: JSON.parse(localStorage.getItem("tarot.dailyCard") || "null"),
   readings: JSON.parse(localStorage.getItem("tarot.readings") || "[]"),
@@ -17,6 +18,7 @@ function save() {
   localStorage.setItem("tarot.lessonDay", String(state.lessonDay));
   localStorage.setItem("tarot.doneTasks", JSON.stringify(state.doneTasks));
   localStorage.setItem("tarot.lessonWork", JSON.stringify(state.lessonWork));
+  localStorage.setItem("tarot.lessonSessions", JSON.stringify(state.lessonSessions));
   localStorage.setItem("tarot.dailyCard", JSON.stringify(state.dailyCard));
   localStorage.setItem("tarot.readings", JSON.stringify(state.readings));
 }
@@ -25,11 +27,11 @@ function cardArt(card, className = "tarot-card") {
   return `
     <div class="${className}" aria-label="${card.name}">
       ${
-        card.imageUrl
-          ? `<img class="card-image" src="${card.imageUrl}" alt="${card.name}" loading="lazy" />`
+        card.image?.kind === "rws"
+          ? `<img class="card-image" src="${card.image.src}" alt="${card.image.alt || card.name}" loading="lazy" />`
           : `
             <div class="card-sky"></div>
-            <div class="card-symbol">${card.symbol}</div>
+            <div class="card-symbol">${card.image?.icon || card.number}</div>
             <div class="card-ground"></div>
           `
       }
@@ -41,7 +43,7 @@ function cardArt(card, className = "tarot-card") {
 function miniCardHtml(card) {
   return `
     <div class="mini-card">
-      ${card.imageUrl ? `<img src="${card.imageUrl}" alt="${card.name}" loading="lazy" />` : `<span>${card.symbol}</span>`}
+      ${card.image?.kind === "rws" ? `<img src="${card.image.src}" alt="${card.image.alt || card.name}" loading="lazy" />` : `<span>${card.image?.icon || card.number}</span>`}
     </div>
   `;
 }
@@ -50,10 +52,10 @@ function practiceCardHtml(card) {
   return `
     <button class="practice-card" data-preview-card="${card.id}" type="button">
       <div class="practice-card-image">
-        ${card.imageUrl ? `<img src="${card.imageUrl}" alt="${card.name}" loading="lazy" />` : symbolicCardHtml(card)}
+        ${card.image?.kind === "rws" ? `<img src="${card.image.src}" alt="${card.image.alt || card.name}" loading="lazy" />` : symbolicCardHtml(card)}
       </div>
       <strong>${card.name}</strong>
-      <span>${card.type}</span>
+      <span>${cardTypeLabel(card)}</span>
     </button>
   `;
 }
@@ -62,11 +64,86 @@ function symbolicCardHtml(card) {
   return `
     <div class="symbolic-card">
       <div class="symbolic-sky"></div>
-      <div class="symbolic-mark">${card.symbol}</div>
+      <div class="symbolic-mark">${card.image?.icon || card.number}</div>
       <div class="symbolic-ground"></div>
       <small>${card.name}</small>
     </div>
   `;
+}
+
+function cardTypeLabel(card) {
+  return card.arcana === "major" ? "大阿尔卡那" : "小阿尔卡那";
+}
+
+function suitLabel(card) {
+  const labels = {
+    major: "大阿尔卡那",
+    wands: "权杖",
+    cups: "圣杯",
+    swords: "宝剑",
+    pentacles: "星币"
+  };
+  return labels[card.suit] || card.suit;
+}
+
+const day1Flow = {
+  day: 1,
+  stage: "阶段一：认识塔罗",
+  title: "My First Tarot Card",
+  estimatedMinutes: 25,
+  steps: ["intro", "learn", "practice", "apply", "feedback"],
+  stepLabels: {
+    intro: "Intro",
+    learn: "Learn",
+    practice: "Practice",
+    apply: "Apply",
+    feedback: "Feedback"
+  }
+};
+
+function getDay1Session() {
+  state.lessonSessions.day1 = state.lessonSessions.day1 || {
+    currentStep: "home",
+    completedSteps: [],
+    answers: {},
+    feedbackViewed: false,
+    firstCardId: null,
+    completedAt: null
+  };
+  return state.lessonSessions.day1;
+}
+
+function saveDay1Session(session) {
+  state.lessonSessions.day1 = session;
+  save();
+}
+
+function markDay1StepComplete(step) {
+  const session = getDay1Session();
+  if (!session.completedSteps.includes(step)) session.completedSteps.push(step);
+  saveDay1Session(session);
+}
+
+function setDay1Step(step) {
+  const session = getDay1Session();
+  session.currentStep = step;
+  saveDay1Session(session);
+  render();
+}
+
+function day1ProgressPercent() {
+  const session = getDay1Session();
+  return Math.round((session.completedSteps.length / day1Flow.steps.length) * 100);
+}
+
+function getDay1FirstCard() {
+  const session = getDay1Session();
+  if (!session.firstCardId) {
+    const visibleCards = cards.filter((card) => card.image?.kind === "rws");
+    session.firstCardId = visibleCards[Math.floor(Math.random() * visibleCards.length)]?.id || cards[0].id;
+    saveDay1Session(session);
+  }
+  return cards.find((card) => card.id === session.firstCardId) || cards[0];
 }
 
 function randomCard() {
@@ -107,6 +184,12 @@ function getLessonDone(lesson = getLesson()) {
 function isLessonComplete(lesson) {
   const done = getLessonDone(lesson);
   return ["course", "observe", "practice"].every((task) => done[task]);
+}
+
+function courseDayState(lesson) {
+  if (lesson.day < state.lessonDay) return "completed";
+  if (lesson.day === state.lessonDay) return "current";
+  return "locked";
 }
 
 function getLessonCover(lesson) {
@@ -199,80 +282,352 @@ function render() {
 }
 
 function renderLearn() {
-  const lesson = getLesson();
-  if (state.showCompletion && isLessonComplete(lesson)) {
-    renderCompletion(lesson);
+  const session = getDay1Session();
+  const lesson = lessons[0];
+  state.lessonDay = 1;
+
+  if (session.currentStep === "completion") {
+    renderDay1Completion();
     return;
   }
-  const done = getLessonDone(lesson);
-  const work = getLessonWork(lesson);
-  const completed = ["course", "observe", "practice"].filter((task) => done[task]).length;
-  const percent = Math.round((completed / 3) * 100);
+
+  if (session.currentStep !== "home") {
+    renderDay1Player(session.currentStep);
+    return;
+  }
 
   app.innerHTML = `
     <section class="hero">
       <div>
-        <h2>第 ${lesson.day} 天：${lesson.title}</h2>
-        <p>${lesson.goal}</p>
+        <p class="eyebrow">${day1Flow.stage}</p>
+        <h2>Day 1：${day1Flow.title}</h2>
+        <p>今天你会完成第一次真实塔罗观察。目标不是背牌义，而是开始学会看牌。</p>
         <div class="button-row">
-          <button class="secondary" id="prevDay">上一课</button>
-          <button class="secondary" id="nextDay">下一天</button>
+          <button class="primary" id="startDay1">${session.completedAt ? "Review Day 1" : session.completedSteps.length ? "继续学习" : "Start Learning"}</button>
         </div>
       </div>
       ${getLessonCover(lesson)}
     </section>
 
-    ${stageMapHtml()}
+    ${day1HomeProgressHtml()}
 
     <section class="section">
       <div class="section-title">
-        <h2>今日进度</h2>
-        <span class="small">${completed}/3 · ${lesson.minutes} 分钟</span>
+        <h2>Today Mission</h2>
+        <span class="small">${day1Flow.estimatedMinutes} 分钟</span>
       </div>
-      <div class="progress" style="--value:${percent}%"><span></span></div>
+      <div class="mission-list">
+        ${day1Flow.steps.map((step) => `
+          <div class="mission-item ${session.completedSteps.includes(step) ? "done" : ""}">
+            <span>${session.completedSteps.includes(step) ? "✓" : ""}</span>
+            <strong>${day1Flow.stepLabels[step]}</strong>
+          </div>
+        `).join("")}
+      </div>
     </section>
-
-    <section class="section task-list" aria-label="Lesson tasks">
-      ${courseTaskHtml(lesson, done)}
-      ${exerciseTaskHtml("observe", "观察练习", lesson.observationExercise, work.observe, done.observe)}
-      ${exerciseTaskHtml("practice", "小练习", lesson.practiceExercise, work.practice, done.practice)}
-      ${takeawayHtml(work.takeaway)}
-    </section>
-
-    ${weekLearningPathHtml()}
   `;
 
-  document.querySelector("#prevDay").addEventListener("click", () => {
-    state.lessonDay = Math.max(state.lessonDay - 1, 1);
-    state.showCompletion = false;
-    save();
-    render();
+  document.querySelector("#startDay1").addEventListener("click", () => {
+    const current = session.completedAt ? "intro" : session.completedSteps.length ? session.currentStep : "intro";
+    setDay1Step(current === "home" ? "intro" : current);
   });
-  document.querySelector("#nextDay").addEventListener("click", () => {
-    state.lessonDay = Math.min(state.lessonDay + 1, lessons.length);
-    state.showCompletion = false;
-    save();
-    render();
-  });
-  document.querySelectorAll("[data-lesson]").forEach((el) => {
-    el.addEventListener("click", () => {
-      state.lessonDay = Number(el.dataset.lesson);
-      state.showCompletion = false;
-      save();
-      render();
+}
+
+function day1HomeProgressHtml() {
+  const session = getDay1Session();
+  const percent = day1ProgressPercent();
+  return `
+    <section class="section lesson-card stage-map">
+      <div class="section-title">
+        <div>
+          <p class="eyebrow">Week 1 Progress</p>
+          <h2>认识塔罗</h2>
+        </div>
+        <span class="small">${session.completedAt ? 1 : 0} / 7</span>
+      </div>
+      <div class="week-progress" aria-label="Week progress">
+        ${lessons.map((lesson) => {
+          const status = lesson.day === 1 ? session.completedAt ? "completed" : "current" : "locked";
+          return `
+            <button class="progress-node ${status}" ${status === "locked" ? "disabled" : ""}>
+              <span>Day ${lesson.day}</span>
+              <strong>${lesson.day === 1 ? session.completedAt ? "✓" : "当前" : "未开始"}</strong>
+            </button>
+          `;
+        }).join("")}
+      </div>
+      <div class="section">
+        <div class="section-title">
+          <h2>Day 1 Progress</h2>
+          <span class="small">${session.completedSteps.length} / ${day1Flow.steps.length}</span>
+        </div>
+        <div class="progress" style="--value:${percent}%"><span></span></div>
+      </div>
+    </section>
+  `;
+}
+
+function renderDay1Player(step) {
+  const session = getDay1Session();
+  const stepIndex = day1Flow.steps.indexOf(step);
+  app.innerHTML = `
+    ${day1StepperHtml(step)}
+    ${day1StepHtml(step, session)}
+  `;
+  bindDay1PlayerEvents(step);
+  bindCardPreviewEvents();
+}
+
+function day1StepperHtml(currentStep) {
+  return `
+    <section class="lesson-stepper" aria-label="Day 1 steps">
+      ${day1Flow.steps.map((step) => {
+        const session = getDay1Session();
+        const complete = session.completedSteps.includes(step);
+        const current = step === currentStep;
+        return `
+          <div class="step-pill ${complete ? "complete" : ""} ${current ? "current" : ""}">
+            <span>${complete ? "✓" : day1Flow.steps.indexOf(step) + 1}</span>
+            <strong>${day1Flow.stepLabels[step]}</strong>
+          </div>
+        `;
+      }).join("")}
+    </section>
+  `;
+}
+
+function day1StepHtml(step, session) {
+  if (step === "intro") return day1IntroHtml();
+  if (step === "learn") return day1LearnHtml();
+  if (step === "practice") return day1PracticeHtml(session);
+  if (step === "apply") return day1ApplyHtml(session);
+  if (step === "feedback") return day1FeedbackHtml(session);
+  return "";
+}
+
+function day1IntroHtml() {
+  return `
+    <section class="lesson-screen">
+      <p class="eyebrow">Lesson Intro</p>
+      <h2>今天不是“上完一课”</h2>
+      <p>今天你会真正看一张塔罗牌，并完成第一次自己的塔罗观察。</p>
+      <div class="first-experience">
+        ${getLessonCover(lessons[0])}
+        <div>
+          <h3>今日目标</h3>
+          <p>学会先看见牌面，再慢慢理解含义。你不需要答对，只需要开始观察。</p>
+        </div>
+      </div>
+      <button class="primary" data-next-step="learn">Begin</button>
+    </section>
+  `;
+}
+
+function day1LearnHtml() {
+  return `
+    <section class="lesson-screen">
+      <p class="eyebrow">Learn</p>
+      <h2>塔罗从观察开始</h2>
+      <div class="lesson-blocks">
+        <div class="lesson-block">
+          <strong>先不要背牌义</strong>
+          <p>塔罗更像一套图像语言。第一步是看见画面里发生了什么。</p>
+        </div>
+        <div class="lesson-block question">
+          <strong>观察三问</strong>
+          <p>我看见了什么？我有什么感觉？这个画面像在讲什么故事？</p>
+        </div>
+        <div class="lesson-block">
+          <strong>今天的标准</strong>
+          <p>只要你的想法来自牌面细节，就是有效的塔罗观察。</p>
+        </div>
+      </div>
+      <button class="primary" data-next-step="practice">Continue to Practice</button>
+    </section>
+  `;
+}
+
+function day1PracticeHtml(session) {
+  const card = cards.find((item) => item.id === "fool");
+  const value = session.answers.practice || "";
+  return `
+    <section class="lesson-screen">
+      <p class="eyebrow">Practice</p>
+      <h2>观察愚人牌</h2>
+      <p class="muted-copy">不要查牌义。只写下你看到的 3 个画面细节。</p>
+      <div class="exercise-cards single">${practiceCardHtml(card)}</div>
+      <div class="field">
+        <label for="practiceAnswer">我注意到...</label>
+        <textarea id="practiceAnswer" placeholder="例如：人物站在悬崖边；旁边有一只小狗；天空很亮。">${escapeHtml(value)}</textarea>
+      </div>
+      <button class="primary" id="submitDay1Practice">${session.completedSteps.includes("practice") ? "已保存，继续" : "Submit Practice"}</button>
+    </section>
+  `;
+}
+
+function day1ApplyHtml(session) {
+  const firstCard = getDay1FirstCard();
+  const answer = session.answers.apply || {};
+  return `
+    <section class="lesson-screen">
+      <p class="eyebrow">Apply</p>
+      <h2>你的第一张塔罗牌</h2>
+      <p class="muted-copy">这是你的第一次真实抽牌体验。不要担心准不准，先描述你看到的东西。</p>
+      <div class="exercise-cards single">${practiceCardHtml(firstCard)}</div>
+      <div class="field">
+        <label for="applyNotice">第一眼看到什么？</label>
+        <textarea id="applyNotice" placeholder="写下第一眼注意到的画面。">${escapeHtml(answer.notice || "")}</textarea>
+      </div>
+      <div class="field">
+        <label for="applyEmotion">这张牌给你什么感觉？</label>
+        <textarea id="applyEmotion" placeholder="轻松、紧张、好奇、沉重都可以。">${escapeHtml(answer.emotion || "")}</textarea>
+      </div>
+      <div class="field">
+        <label for="applyMessage">如果它描述你的学习旅程，它可能在说什么？</label>
+        <textarea id="applyMessage" placeholder="例如：我正在开始一件新事。">${escapeHtml(answer.message || "")}</textarea>
+      </div>
+      <button class="primary" id="submitDay1Apply">${session.completedSteps.includes("apply") ? "已保存，继续" : "Submit Application"}</button>
+    </section>
+  `;
+}
+
+function day1FeedbackHtml(session) {
+  const firstCard = cards.find((card) => card.id === session.firstCardId) || cards[0];
+  const practice = session.answers.practice || "";
+  const apply = session.answers.apply || {};
+  return `
+    <section class="lesson-screen">
+      <p class="eyebrow">Feedback</p>
+      <h2>你已经完成第一次塔罗观察</h2>
+      <div class="feedback reference">
+        <strong>你的练习观察</strong>
+        <p>${escapeHtml(practice) || "还没有填写练习观察。"}</p>
+      </div>
+      <div class="feedback reference">
+        <strong>参考观察：愚人牌</strong>
+        <ul>
+          <li>人物站在悬崖边，像是即将出发。</li>
+          <li>他抬头看向远方，画面有轻松和冒险感。</li>
+          <li>小狗、包袱和白花都暗示天真、提醒和新的开始。</li>
+        </ul>
+      </div>
+      <div class="feedback correct">
+        <strong>你的第一张牌：${firstCard.name}</strong>
+        <p>你第一眼看到：${escapeHtml(apply.notice || "")}</p>
+        <p>你感受到：${escapeHtml(apply.emotion || "")}</p>
+        <p>你给自己的学习提示：${escapeHtml(apply.message || "")}</p>
+      </div>
+      <div class="skill-check">
+        <h3>Skill Check</h3>
+        <p>✓ 你观察了真实牌面</p>
+        <p>✓ 你把图像和感觉连接起来</p>
+        <p>✓ 你完成了第一次自己的塔罗表达</p>
+      </div>
+      <button class="primary" id="completeDay1">Complete Today’s Lesson</button>
+    </section>
+  `;
+}
+
+function bindDay1PlayerEvents(step) {
+  document.querySelectorAll("[data-next-step]").forEach((button) => {
+    button.addEventListener("click", () => {
+      markDay1StepComplete(step);
+      setDay1Step(button.dataset.nextStep);
     });
   });
-  document.querySelector("#completeCourse").addEventListener("click", () => completeTask("course"));
-  document.querySelectorAll("[data-submit-task]").forEach((button) => {
-    button.addEventListener("click", () => submitTask(button.dataset.submitTask));
-  });
-  document.querySelector("#saveTakeaway")?.addEventListener("click", saveTakeaway);
+  document.querySelector("#submitDay1Practice")?.addEventListener("click", submitDay1Practice);
+  document.querySelector("#submitDay1Apply")?.addEventListener("click", submitDay1Apply);
+  document.querySelector("#completeDay1")?.addEventListener("click", completeDay1);
+}
+
+function submitDay1Practice() {
+  const input = document.querySelector("#practiceAnswer");
+  const value = input.value.trim();
+  if (!value) {
+    input.focus();
+    input.classList.add("input-error");
+    return;
+  }
+  const session = getDay1Session();
+  session.answers.practice = value;
+  if (!session.completedSteps.includes("practice")) session.completedSteps.push("practice");
+  session.currentStep = "apply";
+  saveDay1Session(session);
+  render();
+}
+
+function submitDay1Apply() {
+  const notice = document.querySelector("#applyNotice").value.trim();
+  const emotion = document.querySelector("#applyEmotion").value.trim();
+  const message = document.querySelector("#applyMessage").value.trim();
+  if (!notice || !emotion || !message) {
+    [document.querySelector("#applyNotice"), document.querySelector("#applyEmotion"), document.querySelector("#applyMessage")]
+      .find((input) => !input.value.trim())
+      ?.focus();
+    return;
+  }
+  const session = getDay1Session();
+  session.answers.apply = { notice, emotion, message };
+  if (!session.completedSteps.includes("apply")) session.completedSteps.push("apply");
+  session.currentStep = "feedback";
+  saveDay1Session(session);
+  render();
+}
+
+function completeDay1() {
+  const session = getDay1Session();
+  if (!session.completedSteps.includes("feedback")) session.completedSteps.push("feedback");
+  session.feedbackViewed = true;
+  session.completedAt = new Date().toISOString();
+  session.currentStep = "completion";
+  state.doneTasks.day1 = { course: true, observe: true, practice: true };
+  state.lessonDay = 1;
+  saveDay1Session(session);
+  render();
+}
+
+function bindCardPreviewEvents() {
   document.querySelectorAll("[data-preview-card]").forEach((button) => {
     button.addEventListener("click", () => openCardPreview(button.dataset.previewCard));
   });
-  document.querySelector("[data-close-preview]")?.addEventListener("click", closeCardPreview);
-  document.querySelector(".card-preview-modal")?.addEventListener("click", (event) => {
-    if (event.target.classList.contains("card-preview-modal")) closeCardPreview();
+}
+
+function renderDay1Completion() {
+  const session = getDay1Session();
+  const firstCard = cards.find((card) => card.id === session.firstCardId) || cards[0];
+  app.innerHTML = `
+    <section class="completion-page">
+      <div class="completion-badge">🎉</div>
+      <p class="eyebrow">今日课程完成</p>
+      <h2>你完成了第一次塔罗体验</h2>
+      <p>今天你不是“读完一课”，而是真的观察了一张牌。</p>
+      <div class="completion-stats">
+        <div><strong>1 天</strong><span>连续学习</span></div>
+        <div><strong>1 / 7</strong><span>第 1 周进度</span></div>
+      </div>
+      <div class="completion-quote">
+        <span>今日第一张牌</span>
+        <strong>${firstCard.name} · ${firstCard.englishName}</strong>
+      </div>
+      <div class="completion-quote">
+        <span>今日金句</span>
+        <strong>“塔罗不是替你决定未来，而是帮助你观察现实。”</strong>
+      </div>
+      <div class="button-row">
+        <button class="primary" id="backDay1Home">Back to Home</button>
+        <button class="secondary" id="reviewDay1">Review Lesson</button>
+      </div>
+    </section>
+  `;
+  document.querySelector("#backDay1Home").addEventListener("click", () => {
+    session.currentStep = "home";
+    saveDay1Session(session);
+    render();
+  });
+  document.querySelector("#reviewDay1").addEventListener("click", () => {
+    session.currentStep = "intro";
+    saveDay1Session(session);
+    render();
   });
 }
 
@@ -288,12 +643,11 @@ function stageMapHtml() {
       </div>
       <div class="week-progress" aria-label="Week progress">
         ${lessons.map((lesson) => {
-          const complete = isLessonComplete(lesson);
-          const active = lesson.day === state.lessonDay;
+          const status = courseDayState(lesson);
           return `
-            <button class="progress-node ${active ? "active" : ""} ${complete ? "complete" : ""}" data-lesson="${lesson.day}">
+            <button class="progress-node ${status}" data-lesson="${lesson.day}" ${status === "locked" ? "disabled" : ""}>
               <span>Day ${lesson.day}</span>
-              <strong>${active ? "当前" : complete ? "✓" : "未开始"}</strong>
+              <strong>${status === "completed" ? "✓" : status === "current" ? "当前" : "未开始"}</strong>
             </button>
           `;
         }).join("")}
@@ -308,10 +662,10 @@ function weekLearningPathHtml() {
       <summary>Week Learning Path</summary>
       <div class="overview-list">
         ${lessons.map((lesson) => `
-          <button class="overview-item ${lesson.day === state.lessonDay ? "active" : ""}" data-lesson="${lesson.day}">
+          <button class="overview-item ${courseDayState(lesson)}" data-lesson="${lesson.day}" ${courseDayState(lesson) === "locked" ? "disabled" : ""}>
             <span>Day ${lesson.day}</span>
             <strong>${lesson.title}</strong>
-            <em>${isLessonComplete(lesson) ? "Completed" : "Open lesson"}</em>
+            <em>${courseDayState(lesson) === "completed" ? "Completed" : courseDayState(lesson) === "current" ? "当前" : "未开始"}</em>
           </button>
         `).join("")}
       </div>
@@ -320,16 +674,11 @@ function weekLearningPathHtml() {
 }
 
 function completedLessonCount() {
-  return lessons.filter((lesson) => isLessonComplete(lesson)).length;
+  return Math.max(state.lessonDay - 1, 0) + (isLessonComplete(getLesson()) ? 1 : 0);
 }
 
 function learningStreak() {
-  let count = 0;
-  for (const lesson of lessons) {
-    if (!isLessonComplete(lesson)) break;
-    count += 1;
-  }
-  return count;
+  return completedLessonCount();
 }
 
 function taskStatus(done) {
@@ -566,10 +915,10 @@ function openCardPreview(cardId) {
       <div class="card-preview-panel">
         <button class="icon-button preview-close" data-close-preview aria-label="关闭">×</button>
         <div class="card-preview-image">
-          ${card.imageUrl ? `<img src="${card.imageUrl}" alt="${card.name}" />` : symbolicCardHtml(card)}
+          ${card.image?.kind === "rws" ? `<img src="${card.image.src}" alt="${card.image.alt || card.name}" />` : symbolicCardHtml(card)}
         </div>
         <h2>${card.name}</h2>
-        <p>${card.en} · ${card.type}</p>
+        <p>${card.englishName} · ${cardTypeLabel(card)} · ${suitLabel(card)}</p>
       </div>
     </div>
   `);
@@ -584,7 +933,8 @@ function closeCardPreview() {
 }
 
 function renderDaily() {
-  const existing = state.dailyCard?.date === todayKey() ? state.dailyCard.card : null;
+  const cached = state.dailyCard?.date === todayKey() ? state.dailyCard.card : null;
+  const existing = cached?.id ? cards.find((card) => card.id === cached.id) : null;
   const card = existing || randomCard();
   if (!existing) {
     state.dailyCard = { date: todayKey(), card };
@@ -596,7 +946,7 @@ function renderDaily() {
       <div class="draw-card">${cardArt(card)}</div>
       <div class="panel">
         <h2>今日牌：${card.name}</h2>
-        <p>${card.upright}</p>
+        <p>${card.uprightMeaning}</p>
         <div class="keywords">
           ${card.keywords.map((word) => `<span class="keyword">${word}</span>`).join("")}
         </div>
@@ -633,7 +983,7 @@ function dailyAdvice(card) {
     swords5: "争论前先问自己：我想解决问题，还是只想赢？",
     pentacles8: "重复练习不是无聊，是你正在积累真正的能力。"
   };
-  return advice[card.id] || card.growth;
+  return advice[card.id] || card.growthMeaning;
 }
 
 function renderAsk() {
@@ -687,14 +1037,14 @@ function buildReading(question, spread, picked) {
         ${miniCardHtml(card)}
         <div>
           <h3>${labels[index]}：${card.name}</h3>
-          <p>${card.upright}</p>
+          <p>${card.uprightMeaning}</p>
           <div class="keywords">${card.keywords.map((word) => `<span class="keyword">${word}</span>`).join("")}</div>
         </div>
       </div>
     `)
     .join("");
 
-  const core = picked.map((card) => card.growth).join(" ");
+  const core = picked.map((card) => card.growthMeaning).join(" ");
 
   return `
     <section class="reading-result">
@@ -717,8 +1067,11 @@ function buildReading(question, spread, picked) {
 function renderLibrary() {
   const types = ["全部", "大阿尔卡那", "小阿尔卡那"];
   const filtered = cards.filter((card) => {
-    const typeOk = state.filter === "全部" || card.type === state.filter;
-    const text = `${card.name}${card.en}${card.keywords.join("")}`;
+    const typeOk =
+      state.filter === "全部" ||
+      (state.filter === "大阿尔卡那" && card.arcana === "major") ||
+      (state.filter === "小阿尔卡那" && card.arcana === "minor");
+    const text = `${card.name}${card.englishName}${card.keywords.join("")}${suitLabel(card)}`;
     return typeOk && text.toLowerCase().includes(state.query.toLowerCase());
   });
 
@@ -753,8 +1106,8 @@ function cardListItem(card) {
     <button class="card-item" data-card="${card.id}">
       ${miniCardHtml(card)}
       <div>
-        <h3>${card.name} · ${card.en}</h3>
-        <p>${card.type} · ${card.tip}</p>
+        <h3>${card.name} · ${card.englishName}</h3>
+        <p>${cardTypeLabel(card)} · ${suitLabel(card)} · ${card.memoryTip}</p>
         <div class="keywords">${card.keywords.map((word) => `<span class="keyword">${word}</span>`).join("")}</div>
       </div>
     </button>
@@ -766,17 +1119,17 @@ function showCardDetail(id) {
   document.querySelector("#cardDetail").innerHTML = `
     <section class="section lesson-card">
       <h2>${card.name}</h2>
-      <p>${card.en} · ${card.type}</p>
+      <p>${card.englishName} · ${cardTypeLabel(card)} · ${suitLabel(card)}</p>
       <h3>正位</h3>
-      <p>${card.upright}</p>
+      <p>${card.uprightMeaning}</p>
       <h3>逆位</h3>
-      <p>${card.reversed}</p>
+      <p>${card.reversedMeaning}</p>
       <h3>不同场景</h3>
       <ul>
-        <li>感情：${card.love}</li>
-        <li>事业：${card.career}</li>
-        <li>金钱：${card.money}</li>
-        <li>成长：${card.growth}</li>
+        <li>感情：${card.loveMeaning}</li>
+        <li>事业：${card.careerMeaning}</li>
+        <li>金钱：${card.moneyMeaning}</li>
+        <li>成长：${card.growthMeaning}</li>
       </ul>
     </section>
   `;
@@ -843,11 +1196,13 @@ document.querySelector("#resetBtn").addEventListener("click", () => {
   localStorage.removeItem("tarot.lessonDay");
   localStorage.removeItem("tarot.doneTasks");
   localStorage.removeItem("tarot.lessonWork");
+  localStorage.removeItem("tarot.lessonSessions");
   localStorage.removeItem("tarot.dailyCard");
   localStorage.removeItem("tarot.readings");
   state.lessonDay = 1;
   state.doneTasks = {};
   state.lessonWork = {};
+  state.lessonSessions = {};
   state.dailyCard = null;
   state.readings = [];
   render();
