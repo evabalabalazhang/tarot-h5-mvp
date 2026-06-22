@@ -1059,10 +1059,9 @@ const cards = [
     "growthMeaning": "先点燃火，再慢慢添柴。",
     "memoryTip": "权杖一是一根火柴：先亮起来。",
     "image": {
-      "kind": "placeholder",
-      "icon": "🔥",
-      "theme": "fire",
-      "label": "权杖"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Wands01.jpg?width=360",
+      "alt": "Ace of Wands Rider-Waite-Smith card"
     }
   },
   {
@@ -1086,10 +1085,9 @@ const cards = [
     "growthMeaning": "看远一点，再走下一步。",
     "memoryTip": "权杖二是把世界拿在手里看。",
     "image": {
-      "kind": "placeholder",
-      "icon": "🔥",
-      "theme": "fire",
-      "label": "权杖"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Wands02.jpg?width=360",
+      "alt": "Two of Wands Rider-Waite-Smith card"
     }
   },
   {
@@ -1113,10 +1111,9 @@ const cards = [
     "growthMeaning": "已经出发，就耐心等船回来。",
     "memoryTip": "权杖三是看着远方的机会。",
     "image": {
-      "kind": "placeholder",
-      "icon": "🔥",
-      "theme": "fire",
-      "label": "权杖"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Wands03.jpg?width=360",
+      "alt": "Three of Wands Rider-Waite-Smith card"
     }
   },
   {
@@ -1140,10 +1137,9 @@ const cards = [
     "growthMeaning": "允许自己庆祝一个小成果。",
     "memoryTip": "权杖四像搭好的庆祝拱门。",
     "image": {
-      "kind": "placeholder",
-      "icon": "🔥",
-      "theme": "fire",
-      "label": "权杖"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Wands04.jpg?width=360",
+      "alt": "Four of Wands Rider-Waite-Smith card"
     }
   },
   {
@@ -1167,10 +1163,9 @@ const cards = [
     "growthMeaning": "把混乱当训练，而不是灾难。",
     "memoryTip": "权杖五是操场上的混战。",
     "image": {
-      "kind": "placeholder",
-      "icon": "🔥",
-      "theme": "fire",
-      "label": "权杖"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Wands05.jpg?width=360",
+      "alt": "Five of Wands Rider-Waite-Smith card"
     }
   },
   {
@@ -1194,10 +1189,9 @@ const cards = [
     "growthMeaning": "站出来接受掌声。",
     "memoryTip": "权杖六是凯旋，但也要记得继续走。",
     "image": {
-      "kind": "placeholder",
-      "icon": "🔥",
-      "theme": "fire",
-      "label": "权杖"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Wands06.jpg?width=360",
+      "alt": "Six of Wands Rider-Waite-Smith card"
     }
   },
   {
@@ -1221,10 +1215,9 @@ const cards = [
     "growthMeaning": "你可以温和，但要有立场。",
     "memoryTip": "权杖七是在高处守住自己。",
     "image": {
-      "kind": "placeholder",
-      "icon": "🔥",
-      "theme": "fire",
-      "label": "权杖"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Wands07.jpg?width=360",
+      "alt": "Seven of Wands Rider-Waite-Smith card"
     }
   },
   {
@@ -1248,10 +1241,9 @@ const cards = [
     "growthMeaning": "速度来了，也要稳住方向。",
     "memoryTip": "权杖八像一排飞出去的箭。",
     "image": {
-      "kind": "placeholder",
-      "icon": "🔥",
-      "theme": "fire",
-      "label": "权杖"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Wands08.jpg?width=360",
+      "alt": "Eight of Wands Rider-Waite-Smith card"
     }
   },
   {
@@ -1275,10 +1267,9 @@ const cards = [
     "growthMeaning": "坚持重要，休息也重要。",
     "memoryTip": "权杖九是带伤站岗。",
     "image": {
-      "kind": "placeholder",
-      "icon": "🔥",
-      "theme": "fire",
-      "label": "权杖"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Wands09.jpg?width=360",
+      "alt": "Nine of Wands Rider-Waite-Smith card"
     }
   },
   {
@@ -1302,10 +1293,9 @@ const cards = [
     "growthMeaning": "不是所有东西都要你一个人背。",
     "memoryTip": "权杖十是快到终点，但太重了。",
     "image": {
-      "kind": "placeholder",
-      "icon": "🔥",
-      "theme": "fire",
-      "label": "权杖"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Wands10.jpg?width=360",
+      "alt": "Ten of Wands Rider-Waite-Smith card"
     }
   },
   {
@@ -1329,10 +1319,9 @@ const cards = [
     "growthMeaning": "允许自己先做一个好奇的新手。",
     "memoryTip": "权杖侍从是拿着火把到处看的人。",
     "image": {
-      "kind": "placeholder",
-      "icon": "🔥",
-      "theme": "fire",
-      "label": "权杖"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Wands11.jpg?width=360",
+      "alt": "Page of Wands Rider-Waite-Smith card"
     }
   },
   {
@@ -1356,10 +1345,9 @@ const cards = [
     "growthMeaning": "热情很好，方向也要清楚。",
     "memoryTip": "权杖骑士很燃，但刹车也要有。",
     "image": {
-      "kind": "placeholder",
-      "icon": "🔥",
-      "theme": "fire",
-      "label": "权杖"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Wands12.jpg?width=360",
+      "alt": "Knight of Wands Rider-Waite-Smith card"
     }
   },
   {
@@ -1383,10 +1371,9 @@ const cards = [
     "growthMeaning": "把自己的光亮出来。",
     "memoryTip": "权杖皇后是温暖又有主见的火。",
     "image": {
-      "kind": "placeholder",
-      "icon": "🔥",
-      "theme": "fire",
-      "label": "权杖"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Wands13.jpg?width=360",
+      "alt": "Queen of Wands Rider-Waite-Smith card"
     }
   },
   {
@@ -1410,10 +1397,9 @@ const cards = [
     "growthMeaning": "用热情带人，而不是压人。",
     "memoryTip": "权杖国王是把火变成方向的人。",
     "image": {
-      "kind": "placeholder",
-      "icon": "🔥",
-      "theme": "fire",
-      "label": "权杖"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Wands14.jpg?width=360",
+      "alt": "King of Wands Rider-Waite-Smith card"
     }
   },
   {
@@ -1437,10 +1423,9 @@ const cards = [
     "growthMeaning": "先让心重新流动。",
     "memoryTip": "圣杯一是一杯开始流出来的感受。",
     "image": {
-      "kind": "placeholder",
-      "icon": "♕",
-      "theme": "water",
-      "label": "圣杯"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Cups01.jpg?width=360",
+      "alt": "Ace of Cups Rider-Waite-Smith card"
     }
   },
   {
@@ -1464,10 +1449,9 @@ const cards = [
     "growthMeaning": "好的连接来自互相看见。",
     "memoryTip": "圣杯二是两个人举杯相对。",
     "image": {
-      "kind": "placeholder",
-      "icon": "♕",
-      "theme": "water",
-      "label": "圣杯"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Cups02.jpg?width=360",
+      "alt": "Two of Cups Rider-Waite-Smith card"
     }
   },
   {
@@ -1491,10 +1475,9 @@ const cards = [
     "growthMeaning": "允许自己接受支持，不必什么都一个人扛。",
     "memoryTip": "圣杯三像一句话：有人和你一起开心。",
     "image": {
-      "kind": "placeholder",
-      "icon": "♕",
-      "theme": "water",
-      "label": "圣杯"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Cups03.jpg?width=360",
+      "alt": "Three of Cups Rider-Waite-Smith card"
     }
   },
   {
@@ -1518,10 +1501,9 @@ const cards = [
     "growthMeaning": "问问自己真正想要什么。",
     "memoryTip": "圣杯四是机会来了，但你不一定想接。",
     "image": {
-      "kind": "placeholder",
-      "icon": "♕",
-      "theme": "water",
-      "label": "圣杯"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Cups04.jpg?width=360",
+      "alt": "Four of Cups Rider-Waite-Smith card"
     }
   },
   {
@@ -1545,10 +1527,9 @@ const cards = [
     "growthMeaning": "失去是真的，剩下的也是真的。",
     "memoryTip": "圣杯五提醒你回头看看还站着的杯子。",
     "image": {
-      "kind": "placeholder",
-      "icon": "♕",
-      "theme": "water",
-      "label": "圣杯"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Cups05.jpg?width=360",
+      "alt": "Five of Cups Rider-Waite-Smith card"
     }
   },
   {
@@ -1572,10 +1553,9 @@ const cards = [
     "growthMeaning": "温柔地看过去，然后回到现在。",
     "memoryTip": "圣杯六像一段带花香的回忆。",
     "image": {
-      "kind": "placeholder",
-      "icon": "♕",
-      "theme": "water",
-      "label": "圣杯"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Cups06.jpg?width=360",
+      "alt": "Six of Cups Rider-Waite-Smith card"
     }
   },
   {
@@ -1599,10 +1579,9 @@ const cards = [
     "growthMeaning": "美好的想象要落到现实步骤。",
     "memoryTip": "圣杯七是一排梦，先分真假。",
     "image": {
-      "kind": "placeholder",
-      "icon": "♕",
-      "theme": "water",
-      "label": "圣杯"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Cups07.jpg?width=360",
+      "alt": "Seven of Cups Rider-Waite-Smith card"
     }
   },
   {
@@ -1626,10 +1605,9 @@ const cards = [
     "growthMeaning": "离开不是失败，是诚实。",
     "memoryTip": "圣杯八是背对旧杯，走向山路。",
     "image": {
-      "kind": "placeholder",
-      "icon": "♕",
-      "theme": "water",
-      "label": "圣杯"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Cups08.jpg?width=360",
+      "alt": "Eight of Cups Rider-Waite-Smith card"
     }
   },
   {
@@ -1653,10 +1631,9 @@ const cards = [
     "growthMeaning": "享受成果，同时保持清醒。",
     "memoryTip": "圣杯九像一句：我挺满意。",
     "image": {
-      "kind": "placeholder",
-      "icon": "♕",
-      "theme": "water",
-      "label": "圣杯"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Cups09.jpg?width=360",
+      "alt": "Nine of Cups Rider-Waite-Smith card"
     }
   },
   {
@@ -1680,10 +1657,9 @@ const cards = [
     "growthMeaning": "真正的圆满需要共同维护。",
     "memoryTip": "圣杯十是一道彩虹下的家。",
     "image": {
-      "kind": "placeholder",
-      "icon": "♕",
-      "theme": "water",
-      "label": "圣杯"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Cups10.jpg?width=360",
+      "alt": "Ten of Cups Rider-Waite-Smith card"
     }
   },
   {
@@ -1707,10 +1683,9 @@ const cards = [
     "growthMeaning": "认真听见心里那条小鱼。",
     "memoryTip": "圣杯侍从像第一次认真感受自己的心。",
     "image": {
-      "kind": "placeholder",
-      "icon": "♕",
-      "theme": "water",
-      "label": "圣杯"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Cups11.jpg?width=360",
+      "alt": "Page of Cups Rider-Waite-Smith card"
     }
   },
   {
@@ -1734,10 +1709,9 @@ const cards = [
     "growthMeaning": "温柔前进，也要脚踩地。",
     "memoryTip": "圣杯骑士骑着马送来一杯心意。",
     "image": {
-      "kind": "placeholder",
-      "icon": "♕",
-      "theme": "water",
-      "label": "圣杯"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Cups12.jpg?width=360",
+      "alt": "Knight of Cups Rider-Waite-Smith card"
     }
   },
   {
@@ -1761,10 +1735,9 @@ const cards = [
     "growthMeaning": "温柔要带着边界。",
     "memoryTip": "圣杯皇后会照顾别人，也要照顾自己。",
     "image": {
-      "kind": "placeholder",
-      "icon": "♕",
-      "theme": "water",
-      "label": "圣杯"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Cups13.jpg?width=360",
+      "alt": "Queen of Cups Rider-Waite-Smith card"
     }
   },
   {
@@ -1788,10 +1761,9 @@ const cards = [
     "growthMeaning": "真正成熟是感受到，但不被淹没。",
     "memoryTip": "圣杯国王坐在海上，却不被浪卷走。",
     "image": {
-      "kind": "placeholder",
-      "icon": "♕",
-      "theme": "water",
-      "label": "圣杯"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Cups14.jpg?width=360",
+      "alt": "King of Cups Rider-Waite-Smith card"
     }
   },
   {
@@ -1815,10 +1787,9 @@ const cards = [
     "growthMeaning": "先把话说清楚。",
     "memoryTip": "宝剑一是一道劈开迷雾的念头。",
     "image": {
-      "kind": "placeholder",
-      "icon": "⚔",
-      "theme": "air",
-      "label": "宝剑"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Swords01.jpg?width=360",
+      "alt": "Ace of Swords Rider-Waite-Smith card"
     }
   },
   {
@@ -1842,10 +1813,9 @@ const cards = [
     "growthMeaning": "不选择本身也是选择。",
     "memoryTip": "宝剑二蒙着眼，说明你不想看。",
     "image": {
-      "kind": "placeholder",
-      "icon": "⚔",
-      "theme": "air",
-      "label": "宝剑"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Swords02.jpg?width=360",
+      "alt": "Two of Swords Rider-Waite-Smith card"
     }
   },
   {
@@ -1869,10 +1839,9 @@ const cards = [
     "growthMeaning": "承认痛，才会开始好。",
     "memoryTip": "宝剑三是心上的雨，但雨会停。",
     "image": {
-      "kind": "placeholder",
-      "icon": "⚔",
-      "theme": "air",
-      "label": "宝剑"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Swords03.jpg?width=360",
+      "alt": "Three of Swords Rider-Waite-Smith card"
     }
   },
   {
@@ -1896,10 +1865,9 @@ const cards = [
     "growthMeaning": "休息是修复系统，不是浪费时间。",
     "memoryTip": "宝剑四是把剑放下，先睡一觉。",
     "image": {
-      "kind": "placeholder",
-      "icon": "⚔",
-      "theme": "air",
-      "label": "宝剑"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Swords04.jpg?width=360",
+      "alt": "Four of Swords Rider-Waite-Smith card"
     }
   },
   {
@@ -1923,10 +1891,9 @@ const cards = [
     "growthMeaning": "问自己：我想赢，还是想解决问题？",
     "memoryTip": "宝剑五提醒：有些胜利很贵。",
     "image": {
-      "kind": "placeholder",
-      "icon": "⚔",
-      "theme": "air",
-      "label": "宝剑"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Swords05.jpg?width=360",
+      "alt": "Five of Swords Rider-Waite-Smith card"
     }
   },
   {
@@ -1950,10 +1917,9 @@ const cards = [
     "growthMeaning": "不是立刻变好，而是开始离开坏状态。",
     "memoryTip": "宝剑六是一艘慢慢驶离的船。",
     "image": {
-      "kind": "placeholder",
-      "icon": "⚔",
-      "theme": "air",
-      "label": "宝剑"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Swords06.jpg?width=360",
+      "alt": "Six of Swords Rider-Waite-Smith card"
     }
   },
   {
@@ -1977,10 +1943,9 @@ const cards = [
     "growthMeaning": "聪明要用在正道上。",
     "memoryTip": "宝剑七是悄悄拿剑走的人。",
     "image": {
-      "kind": "placeholder",
-      "icon": "⚔",
-      "theme": "air",
-      "label": "宝剑"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Swords07.jpg?width=360",
+      "alt": "Seven of Swords Rider-Waite-Smith card"
     }
   },
   {
@@ -2004,10 +1969,9 @@ const cards = [
     "growthMeaning": "你可能比自己想的更自由。",
     "memoryTip": "宝剑八被绑住，但脚下仍有路。",
     "image": {
-      "kind": "placeholder",
-      "icon": "⚔",
-      "theme": "air",
-      "label": "宝剑"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Swords08.jpg?width=360",
+      "alt": "Eight of Swords Rider-Waite-Smith card"
     }
   },
   {
@@ -2031,10 +1995,9 @@ const cards = [
     "growthMeaning": "把脑内风暴写下来。",
     "memoryTip": "宝剑九是半夜醒来的担心。",
     "image": {
-      "kind": "placeholder",
-      "icon": "⚔",
-      "theme": "air",
-      "label": "宝剑"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Swords09.jpg?width=360",
+      "alt": "Nine of Swords Rider-Waite-Smith card"
     }
   },
   {
@@ -2058,10 +2021,9 @@ const cards = [
     "growthMeaning": "已经到底，就不会一直往下。",
     "memoryTip": "宝剑十很痛，但太阳在远处升起。",
     "image": {
-      "kind": "placeholder",
-      "icon": "⚔",
-      "theme": "air",
-      "label": "宝剑"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Swords10.jpg?width=360",
+      "alt": "Ten of Swords Rider-Waite-Smith card"
     }
   },
   {
@@ -2085,10 +2047,9 @@ const cards = [
     "growthMeaning": "保持好奇，也保持礼貌。",
     "memoryTip": "宝剑侍从是拿着剑学习表达的人。",
     "image": {
-      "kind": "placeholder",
-      "icon": "⚔",
-      "theme": "air",
-      "label": "宝剑"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Swords11.jpg?width=360",
+      "alt": "Page of Swords Rider-Waite-Smith card"
     }
   },
   {
@@ -2112,10 +2073,9 @@ const cards = [
     "growthMeaning": "快之前，先确认方向。",
     "memoryTip": "宝剑骑士冲得很快，也容易冲过头。",
     "image": {
-      "kind": "placeholder",
-      "icon": "⚔",
-      "theme": "air",
-      "label": "宝剑"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Swords12.jpg?width=360",
+      "alt": "Knight of Swords Rider-Waite-Smith card"
     }
   },
   {
@@ -2139,10 +2099,9 @@ const cards = [
     "growthMeaning": "温柔可以有，边界也要有。",
     "memoryTip": "宝剑皇后看得清，也说得清。",
     "image": {
-      "kind": "placeholder",
-      "icon": "⚔",
-      "theme": "air",
-      "label": "宝剑"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Swords13.jpg?width=360",
+      "alt": "Queen of Swords Rider-Waite-Smith card"
     }
   },
   {
@@ -2166,10 +2125,9 @@ const cards = [
     "growthMeaning": "清晰是力量，冷酷不是。",
     "memoryTip": "宝剑国王用头脑掌舵。",
     "image": {
-      "kind": "placeholder",
-      "icon": "⚔",
-      "theme": "air",
-      "label": "宝剑"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Swords14.jpg?width=360",
+      "alt": "King of Swords Rider-Waite-Smith card"
     }
   },
   {
@@ -2193,10 +2151,9 @@ const cards = [
     "growthMeaning": "把机会种进土里。",
     "memoryTip": "星币一是一颗可以长大的种子。",
     "image": {
-      "kind": "placeholder",
-      "icon": "●",
-      "theme": "earth",
-      "label": "星币"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Pents01.jpg?width=360",
+      "alt": "Ace of Pentacles Rider-Waite-Smith card"
     }
   },
   {
@@ -2220,10 +2177,9 @@ const cards = [
     "growthMeaning": "先稳住节奏。",
     "memoryTip": "星币二是在浪里 juggling 两枚硬币。",
     "image": {
-      "kind": "placeholder",
-      "icon": "●",
-      "theme": "earth",
-      "label": "星币"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Pents02.jpg?width=360",
+      "alt": "Two of Pentacles Rider-Waite-Smith card"
     }
   },
   {
@@ -2247,10 +2203,9 @@ const cards = [
     "growthMeaning": "让专业说话。",
     "memoryTip": "星币三是在教堂里认真施工。",
     "image": {
-      "kind": "placeholder",
-      "icon": "●",
-      "theme": "earth",
-      "label": "星币"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Pents03.jpg?width=360",
+      "alt": "Three of Pentacles Rider-Waite-Smith card"
     }
   },
   {
@@ -2274,10 +2229,9 @@ const cards = [
     "growthMeaning": "安全感不是把一切攥死。",
     "memoryTip": "星币四抱得太紧，也会累。",
     "image": {
-      "kind": "placeholder",
-      "icon": "●",
-      "theme": "earth",
-      "label": "星币"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Pents04.jpg?width=360",
+      "alt": "Four of Pentacles Rider-Waite-Smith card"
     }
   },
   {
@@ -2301,10 +2255,9 @@ const cards = [
     "growthMeaning": "困难时别独自站在门外。",
     "memoryTip": "星币五提醒：窗里有光，可以求助。",
     "image": {
-      "kind": "placeholder",
-      "icon": "●",
-      "theme": "earth",
-      "label": "星币"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Pents05.jpg?width=360",
+      "alt": "Five of Pentacles Rider-Waite-Smith card"
     }
   },
   {
@@ -2328,10 +2281,9 @@ const cards = [
     "growthMeaning": "会给，也要会接。",
     "memoryTip": "星币六是一只手给出资源。",
     "image": {
-      "kind": "placeholder",
-      "icon": "●",
-      "theme": "earth",
-      "label": "星币"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Pents06.jpg?width=360",
+      "alt": "Six of Pentacles Rider-Waite-Smith card"
     }
   },
   {
@@ -2355,10 +2307,9 @@ const cards = [
     "growthMeaning": "别每天挖开土看种子长没长。",
     "memoryTip": "星币七是站在田边等收成。",
     "image": {
-      "kind": "placeholder",
-      "icon": "●",
-      "theme": "earth",
-      "label": "星币"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Pents07.jpg?width=360",
+      "alt": "Seven of Pentacles Rider-Waite-Smith card"
     }
   },
   {
@@ -2382,10 +2333,9 @@ const cards = [
     "growthMeaning": "每天一点点，你会真的变强。",
     "memoryTip": "星币八就是你现在做这个产品的牌。",
     "image": {
-      "kind": "placeholder",
-      "icon": "●",
-      "theme": "earth",
-      "label": "星币"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Pents08.jpg?width=360",
+      "alt": "Eight of Pentacles Rider-Waite-Smith card"
     }
   },
   {
@@ -2409,10 +2359,9 @@ const cards = [
     "growthMeaning": "你可以享受自己努力来的东西。",
     "memoryTip": "星币九是站在花园里的独立感。",
     "image": {
-      "kind": "placeholder",
-      "icon": "●",
-      "theme": "earth",
-      "label": "星币"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Pents09.jpg?width=360",
+      "alt": "Nine of Pentacles Rider-Waite-Smith card"
     }
   },
   {
@@ -2436,10 +2385,9 @@ const cards = [
     "growthMeaning": "把眼光放到更长的时间里。",
     "memoryTip": "星币十是现实世界的长期稳定。",
     "image": {
-      "kind": "placeholder",
-      "icon": "●",
-      "theme": "earth",
-      "label": "星币"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Pents10.jpg?width=360",
+      "alt": "Ten of Pentacles Rider-Waite-Smith card"
     }
   },
   {
@@ -2463,10 +2411,9 @@ const cards = [
     "growthMeaning": "慢慢学，真的会有结果。",
     "memoryTip": "星币侍从是认真捧着种子的人。",
     "image": {
-      "kind": "placeholder",
-      "icon": "●",
-      "theme": "earth",
-      "label": "星币"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Pents11.jpg?width=360",
+      "alt": "Page of Pentacles Rider-Waite-Smith card"
     }
   },
   {
@@ -2490,10 +2437,9 @@ const cards = [
     "growthMeaning": "慢不是问题，不动才是问题。",
     "memoryTip": "星币骑士走得慢，但会走到。",
     "image": {
-      "kind": "placeholder",
-      "icon": "●",
-      "theme": "earth",
-      "label": "星币"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Pents12.jpg?width=360",
+      "alt": "Knight of Pentacles Rider-Waite-Smith card"
     }
   },
   {
@@ -2517,10 +2463,9 @@ const cards = [
     "growthMeaning": "照顾别人时，也把自己算进去。",
     "memoryTip": "星币皇后让日子真正过起来。",
     "image": {
-      "kind": "placeholder",
-      "icon": "●",
-      "theme": "earth",
-      "label": "星币"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Pents13.jpg?width=360",
+      "alt": "Queen of Pentacles Rider-Waite-Smith card"
     }
   },
   {
@@ -2544,10 +2489,9 @@ const cards = [
     "growthMeaning": "真正的富足是能稳定承载生活。",
     "memoryTip": "星币国王是把资源经营成王国的人。",
     "image": {
-      "kind": "placeholder",
-      "icon": "●",
-      "theme": "earth",
-      "label": "星币"
+      "kind": "rws",
+      "src": "https://commons.wikimedia.org/wiki/Special:FilePath/Pents14.jpg?width=360",
+      "alt": "King of Pentacles Rider-Waite-Smith card"
     }
   }
 ];

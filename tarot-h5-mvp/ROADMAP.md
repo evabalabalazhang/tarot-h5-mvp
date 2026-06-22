@@ -6,7 +6,7 @@ Phase: Week 1 learning experience implementation.
 
 Current priority:
 
-> Implement Day 2 as a complete step-based learning experience.
+> Implement Day 3 as a complete step-based learning experience.
 
 Do not prioritize new features until Day 1-Day 7 learning flow is validated.
 
@@ -33,7 +33,7 @@ Validation goal:
 
 ## Phase 2: Day 2 Implementation
 
-Next.
+Status: Implemented.
 
 Goal:
 
@@ -63,6 +63,10 @@ Success criteria:
 Goal:
 
 Complete Week 1 as a real training sequence.
+
+Current next task:
+
+> Day 3: Theme vs Detail interpretation
 
 Days:
 
@@ -165,4 +169,3 @@ Focus:
 - Independent readings
 - Reading revision
 - Final beginner graduation
-

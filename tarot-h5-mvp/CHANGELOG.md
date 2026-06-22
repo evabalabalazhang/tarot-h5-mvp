@@ -46,6 +46,7 @@ The project is an H5 MVP for a 90-day tarot training system.
 - Added daily card draw
 - Added simulated AI reading
 - Added profile/progress area
+- Localized visible learning interface copy into Chinese
 
 ### Day 1
 
@@ -68,10 +69,34 @@ Day 1 supports:
 - First real tarot card experience
 - Feedback display
 - Completion screen
+- Chinese-only learner-facing labels and actions
+
+### Day 2
+
+Implemented Day 2 as a complete learning experience:
+
+- Home behavior after Day 1 completion
+- Start Learning
+- Lesson Intro
+- Learn
+- Deck-structure Practice
+- Real-card Apply exercise
+- Feedback
+- Daily Completion
+
+Day 2 supports:
+
+- Step-based lesson player
+- Answer saving
+- Progress tracking
+- Deck structure exercise
+- Card placement into the deck map
+- Feedback explaining the correct tarot structure
+- Beginner-friendly Chinese feedback summary instead of a technical deck-map display
+- Chinese-only learner-facing labels and actions
 
 ## Not Yet Implemented
 
-- Day 2 complete step-based lesson
 - Day 3-Day 7 complete step-based lessons
 - Week 1 graduation screen
 - Major Arcana journey
@@ -83,5 +108,4 @@ Day 1 supports:
 
 ## Current Next Step
 
-Implement Day 2.
-
+Implement Day 3.

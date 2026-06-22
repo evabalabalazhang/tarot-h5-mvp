@@ -8,7 +8,7 @@ Do not add new major features until Week 1 is implemented and tested.
 
 Current next coding task:
 
-> Implement Day 2 as a complete step-based lesson experience.
+> Implement Day 3 as a complete step-based lesson experience.
 
 ## Product Direction
 
@@ -32,7 +32,7 @@ Work only on the current priority unless explicitly instructed otherwise.
 
 Current scope:
 
-- Day 2 implementation
+- Day 3 implementation
 - Week 1 learning flow
 - Lesson-player quality
 - Progress and feedback
@@ -51,7 +51,7 @@ Out of scope for now:
 
 1. Do not redesign the curriculum unless explicitly asked.
 2. Do not modify Day 1 behavior unless fixing a bug or improving consistency.
-3. Use the existing Day 1 player as the reference pattern for Day 2.
+3. Use the existing Day 1 and Day 2 players as the reference pattern for Day 3.
 4. Preserve the normalized 78-card data schema.
 5. Keep learning data-driven, not hardcoded into UI where avoidable.
 6. Save user answers and progress locally.
@@ -125,4 +125,3 @@ When implementation changes product behavior, update:
 - `TASKS.md`
 
 Update `PRODUCT.md` or `ROADMAP.md` only when product direction or project plan changes.
-
