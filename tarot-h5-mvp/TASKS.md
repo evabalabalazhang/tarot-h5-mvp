@@ -22,10 +22,13 @@ Current implementation priority:
 - Implemented card preview modal
 - Implemented Day 2 complete flow
 - Added Day 2 deck-structure practice
-- Added Day 2 real-card deck-map application
+- Added Day 2 real-card Major / Minor role application
 - Added Day 2 feedback and completion screen
 - Improved Day 2 feedback wording into a beginner-friendly Chinese learning summary
 - Changed learner-facing learning UI copy to Chinese only
+- Kept Day 2 suit learning to structure only: 4 suits, 14 cards each
+- Redesigned Day 2 Apply to create an intuitive Major / Minor comparison moment
+- Added Day 2 visual comparison before Major / Minor definitions
 
 ## Immediate Next Task: Day 3
 

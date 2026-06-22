@@ -661,6 +661,49 @@ h3 {
   font-weight: 900;
 }
 
+.day2-compare {
+  display: grid;
+  gap: 12px;
+}
+
+.day2-compare > div {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fffdf8;
+}
+
+.day2-compare > div > strong {
+  font-size: 14px;
+}
+
+.day2-compare-cards {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.day2-compare-card {
+  flex: 0 0 104px;
+  display: grid;
+  gap: 6px;
+  text-align: center;
+}
+
+.day2-compare-card .practice-card-image {
+  width: 104px;
+  height: 174px;
+}
+
+.day2-compare-card span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
 .deck-placement-list {
   display: grid;
   gap: 12px;

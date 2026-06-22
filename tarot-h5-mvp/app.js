@@ -410,7 +410,7 @@ function renderDay2Home() {
       <div>
         <p class="eyebrow">${day2Flow.stage}</p>
         <h2>第 2 天：${day2Flow.title}</h2>
-        <p>今天你会把 78 张牌放进一张清楚的地图里：大牌、小牌、四个牌组。</p>
+        <p>今天你会把 78 张牌分成两层：大牌看人生主题，小牌看日常处境。</p>
         <div class="button-row">
           <button class="primary" id="startDay2">${session.completedAt ? "复习第 2 天" : session.completedSteps.length ? "继续学习" : "开始学习"}</button>
         </div>
@@ -725,26 +725,54 @@ function day2IntroHtml() {
 }
 
 function day2LearnHtml() {
+  const majorExamples = ["fool", "emperor", "hermit"].map((id) => cards.find((card) => card.id === id));
+  const minorExamples = ["cups3", "pentacles8", "swords5"].map((id) => cards.find((card) => card.id === id));
   return `
     <section class="lesson-screen">
       <p class="eyebrow">学习</p>
-      <h2>一副维特塔罗的地图</h2>
+      <h2>先观察，再命名</h2>
+      <p class="muted-copy">先不要急着背“大牌”“小牌”。先看两组牌面，感受它们像在讲不同层级的事情。</p>
+      <div class="day2-compare">
+        <div>
+          <strong>第一组</strong>
+          <div class="day2-compare-cards">
+            ${majorExamples.map(day2CompareCardHtml).join("")}
+          </div>
+        </div>
+        <div>
+          <strong>第二组</strong>
+          <div class="day2-compare-cards">
+            ${minorExamples.map(day2CompareCardHtml).join("")}
+          </div>
+        </div>
+      </div>
       <div class="lesson-blocks">
-        <div class="lesson-block">
-          <strong>78 张牌</strong>
-          <p>标准维特塔罗一共有 78 张牌。它们不是随机排列，而是分成两大层。</p>
+        <div class="lesson-block question">
+          <strong>你注意到了什么？</strong>
+          <p>第一组更像人物、阶段、原型或人生转折；第二组更像正在发生的事件、行动和日常经验。</p>
         </div>
         <div class="lesson-block question">
-          <strong>22 + 56</strong>
+          <strong>现在再给它们命名</strong>
           <p>22 张大阿尔卡那代表人生主题；56 张小阿尔卡那代表日常生活里的具体状态。</p>
         </div>
         <div class="lesson-block">
-          <strong>4 个牌组</strong>
-          <p>小阿尔卡那有 4 个牌组：权杖、圣杯、宝剑、星币。每个牌组有 14 张牌。</p>
+          <strong>完整结构</strong>
+          <p>一副维特塔罗有 78 张牌：22 张大阿尔卡那，56 张小阿尔卡那。56 张小牌分成 4 个牌组，每组 14 张。</p>
         </div>
       </div>
       <button class="primary" data-day2-next-step="practice">进入练习</button>
     </section>
+  `;
+}
+
+function day2CompareCardHtml(card) {
+  return `
+    <div class="day2-compare-card">
+      <div class="practice-card-image">
+        ${card.image?.kind === "rws" ? `<img src="${card.image.src}" alt="${card.name}" loading="lazy" />` : symbolicCardHtml(card)}
+      </div>
+      <span>${card.name}</span>
+    </div>
   `;
 }
 
@@ -778,25 +806,22 @@ function structureInputHtml(id, label, value) {
 
 function day2ApplyHtml(session) {
   const answer = session.answers.apply || {};
-  const applyCards = ["fool", "wands1", "cups3", "pentacles-king"].map((id) => cards.find((card) => card.id === id));
+  const applyCards = ["fool", "emperor", "hermit", "cups3", "pentacles8", "swords5"].map((id) => cards.find((card) => card.id === id));
   return `
     <section class="lesson-screen">
       <p class="eyebrow">应用</p>
-      <h2>把真实卡牌放进地图</h2>
-      <p class="muted-copy">观察每张牌，把它放进正确的位置：大阿尔卡那，或小阿尔卡那的某个牌组。</p>
+      <h2>先凭感觉分成两组</h2>
+      <p class="muted-copy">不要查牌义，也不要靠牌名。只看画面：哪一组更像人生章节？哪一组更像日常片段？</p>
       <div class="deck-placement-list">
-        ${applyCards.map((card) => `
+        ${applyCards.map((card, index) => `
           <div class="deck-placement-item">
-            ${practiceCardHtml(card)}
+            ${day2ApplyCardHtml(card, index)}
             <label>
-              <span>${card.name} 属于哪里？</span>
+              <span>案例牌 ${String.fromCharCode(65 + index)} 给你的感觉更像什么？</span>
               <select data-day2-card="${card.id}">
                 <option value="">请选择</option>
-                <option value="major" ${answer[card.id] === "major" ? "selected" : ""}>大阿尔卡那</option>
-                <option value="wands" ${answer[card.id] === "wands" ? "selected" : ""}>小阿尔卡那 / 权杖</option>
-                <option value="cups" ${answer[card.id] === "cups" ? "selected" : ""}>小阿尔卡那 / 圣杯</option>
-                <option value="swords" ${answer[card.id] === "swords" ? "selected" : ""}>小阿尔卡那 / 宝剑</option>
-                <option value="pentacles" ${answer[card.id] === "pentacles" ? "selected" : ""}>小阿尔卡那 / 星币</option>
+                <option value="major" ${answer[card.id] === "major" ? "selected" : ""}>像人生章节 / 重大主题</option>
+                <option value="minor" ${day2ApplyAnswerValue(answer[card.id]) === "minor" ? "selected" : ""}>像日常片段 / 具体处境</option>
               </select>
             </label>
           </div>
@@ -804,6 +829,18 @@ function day2ApplyHtml(session) {
       </div>
       <button class="primary" id="submitDay2Apply">${session.completedSteps.includes("apply") ? "已保存，继续" : "提交应用"}</button>
     </section>
+  `;
+}
+
+function day2ApplyCardHtml(card, index) {
+  return `
+    <div class="practice-card day2-apply-card" aria-label="案例牌 ${String.fromCharCode(65 + index)}">
+      <div class="practice-card-image">
+        ${card.image?.kind === "rws" ? `<img src="${card.image.src}" alt="案例牌 ${String.fromCharCode(65 + index)}" loading="lazy" />` : symbolicCardHtml(card)}
+      </div>
+      <strong>案例牌 ${String.fromCharCode(65 + index)}</strong>
+      <span>先感受画面层级</span>
+    </div>
   `;
 }
 
@@ -823,18 +860,25 @@ function day2FeedbackHtml(session) {
           <li>总牌数：78</li>
           <li>大阿尔卡那：22</li>
           <li>小阿尔卡那：56</li>
-          <li>小牌牌组：4</li>
-          <li>每组牌数：14</li>
+          <li>小阿尔卡那：4 个牌组</li>
+          <li>每个牌组：14 张</li>
         </ul>
       </div>
       <div class="feedback ${applyCorrect ? "correct" : "incorrect"}">
-        <strong>卡牌归类</strong>
+        <strong>模式揭示</strong>
+        <p>${applyCorrect ? "你抓到这两组牌的层级差异了。" : "没关系，重点不是一次答对，而是看见两组画面的差异。"}</p>
         <ul>
-          <li>愚人 → 大阿尔卡那</li>
-          <li>权杖一 → 小阿尔卡那 / 权杖</li>
-          <li>圣杯三 → 小阿尔卡那 / 圣杯</li>
-          <li>星币国王 → 小阿尔卡那 / 星币</li>
+          <li>案例牌 A（愚人）→ 大阿尔卡那：像一个新阶段的开始。</li>
+          <li>案例牌 B（皇帝）→ 大阿尔卡那：像秩序、责任和掌控这样的原型主题。</li>
+          <li>案例牌 C（隐士）→ 大阿尔卡那：像独处、寻找和内在成长的阶段。</li>
+          <li>案例牌 D（圣杯三）→ 小阿尔卡那：像朋友相聚、庆祝这样的日常场景。</li>
+          <li>案例牌 E（星币八）→ 小阿尔卡那：像练习技能、重复打磨这样的具体行动。</li>
+          <li>案例牌 F（宝剑五）→ 小阿尔卡那：像争执、沟通摩擦这样的具体事件。</li>
         </ul>
+      </div>
+      <div class="feedback reference">
+        <strong>你可以这样感受差异</strong>
+        <p>大阿尔卡那像“人生的一章”：开始、崩塌、选择、成长、转变。小阿尔卡那像“这一章里的某一天”：一次聚会、一段练习、一场沟通、一个现实任务。</p>
       </div>
       <div class="deck-map-answer">
         <h3>今日结构总结</h3>
@@ -848,19 +892,18 @@ function day2FeedbackHtml(session) {
             <strong>小阿尔卡那：56 张</strong>
             <span>代表日常事件、情绪、行动和现实处境。</span>
           </div>
+          <div>
+            <strong>56 张小牌 = 4 个牌组</strong>
+            <span>权杖、圣杯、宝剑、星币。每组 14 张。今天只记结构，含义第 4 天再学。</span>
+          </div>
         </div>
-        <ul class="suit-summary-list">
-          <li><strong>权杖</strong><span>行动 / 热情 / 推进</span></li>
-          <li><strong>圣杯</strong><span>情感 / 关系 / 感受</span></li>
-          <li><strong>宝剑</strong><span>思考 / 沟通 / 判断</span></li>
-          <li><strong>星币</strong><span>金钱 / 工作 / 现实</span></li>
-        </ul>
       </div>
       <div class="skill-check">
         <h3>你已经掌握了</h3>
         <p>✓ 你知道一副牌不是随机的 78 张牌</p>
         <p>✓ 你能区分大阿尔卡那和小阿尔卡那</p>
-        <p>✓ 你开始能把小牌放进四个牌组</p>
+        <p>✓ 你知道小阿尔卡那由 4 个牌组组成，每组 14 张</p>
+        <p>✓ 你开始能感受到：大牌像人生章节，小牌像日常片段</p>
       </div>
       <button class="primary" id="completeDay2">完成今日课程</button>
     </section>
@@ -878,11 +921,17 @@ function day2PracticeIsCorrect(answer) {
 function day2ApplyIsCorrect(answer) {
   const correct = {
     fool: "major",
-    wands1: "wands",
-    cups3: "cups",
-    "pentacles-king": "pentacles"
+    emperor: "major",
+    hermit: "major",
+    cups3: "minor",
+    pentacles8: "minor",
+    swords5: "minor"
   };
-  return Object.entries(correct).every(([id, value]) => answer[id] === value);
+  return Object.entries(correct).every(([id, value]) => day2ApplyAnswerValue(answer[id]) === value);
+}
+
+function day2ApplyAnswerValue(value) {
+  return ["wands", "cups", "swords", "pentacles"].includes(value) ? "minor" : value;
 }
 
 function bindDay1PlayerEvents(step) {

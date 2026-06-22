@@ -90,10 +90,14 @@ Day 2 supports:
 - Answer saving
 - Progress tracking
 - Deck structure exercise
-- Card placement into the deck map
+- Major / Minor role application using real card images
 - Feedback explaining the correct tarot structure
 - Beginner-friendly Chinese feedback summary instead of a technical deck-map display
 - Chinese-only learner-facing labels and actions
+- Day 2 avoids suit meanings so Day 4 can introduce them later
+- Day 2 Learn now starts with visual comparison before explaining Major / Minor definitions
+- Day 2 restores Minor Arcana deck structure: 4 suits, 14 cards each, without teaching suit meanings yet
+- Day 2 Apply uses intuitive grouping and pattern reveal so beginners can feel the Major / Minor difference
 
 ## Not Yet Implemented
 
